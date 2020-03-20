@@ -1,7 +1,10 @@
 import com.alibaba.fastjson.JSON;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.annotation.PostConstruct;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -37,6 +40,24 @@ public class MyTest {
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
+
+        //注解测试使用
+        Class clazz = Class.forName("Apple");
+
+        //获取类注解信息
+        AnnotationExample classAnno =(AnnotationExample) clazz.getAnnotation(AnnotationExample.class);
+        System.out.println( classAnno.name()+"---"+classAnno.value()+"---"+classAnno.path());
+
+        //获取所以方法注解信息 ps:这里需要使用 isAnnotationPresent 判断方法上是否使用了注解
+        Method[] allMethods = clazz.getDeclaredMethods();
+        for(int i=0;i<allMethods.length;i++){
+            if(allMethods[i].isAnnotationPresent(AnnotationExample.class)) {
+                AnnotationExample methodAnno = allMethods[i].getAnnotation(AnnotationExample.class);
+                System.out.println("遍历:当前方法名为："+allMethods[i].getName()+" 的注解信息：---"+methodAnno.name() + "---" + methodAnno.value() + "---" + methodAnno.path());
+            }
+        }
+
+
 //        Thread t1 = new Thread(() -> printApples("one"));
 //        Thread t2 = new Thread(() -> printApples("two"));
 //        t1.start();
@@ -44,7 +65,7 @@ public class MyTest {
 
 //        String name = null;
 //        System.out.print("name=\n"+name);
-//        Optional name2 = Optional.ofNullable(name).orElse("hello");
+//        Optional name2 = Optional.ofNullagetColorble(name).orElse("hello");
 //        System.out.print("name2=\n"+name2);
 
 //        CountDownLatch latch = new CountDownLatch(10);
@@ -65,6 +86,7 @@ public class MyTest {
 //        Apple apple1 = new Apple();
 //        apple1.setColor("Green");
 //        apple1.setWeight(100);
+//        apple1.getWeight();
 //        apples.add(apple1);
 //
 //        Apple apple2 = new Apple();
@@ -74,6 +96,10 @@ public class MyTest {
 //
 //        List<Apple> filterAppleResult = filterApples(apples, (Apple a)->"Green".equals(a.getColor()));
 //        System.out.print("filterAppleResult="+JSON.toJSONString(filterAppleResult));
+//
+//        ApplicationContext context = new AnnotationConfigApplicationContext(Apple.class);
+//        context.getBean("getWeight");
+//        context.getBean("getWeight");
 //
 //        System.out.print("\n");
 //

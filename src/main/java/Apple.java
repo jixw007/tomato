@@ -1,7 +1,12 @@
+import com.alibaba.fastjson.JSON;
+import org.springframework.context.annotation.Bean;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@AnnotationExample(name="Apple",value="class",path="com.alibaba.fastjson.JSON")
 public class Apple {
+    @AnnotationExample(name="getColor",value="function",path="com.alibaba.fastjson.JSON")
     public String getColor() {
         return color;
     }
@@ -10,7 +15,9 @@ public class Apple {
         this.color = color;
     }
 
+    @Bean
     public Integer getWeight() {
+        System.out.print("hello getWeight!\n");
         return weight;
     }
 
@@ -18,6 +25,7 @@ public class Apple {
         this.weight = weight;
     }
 
+    @AnnotationExample(name="color",value="filed",path="com.alibaba.fastjson.JSON")
     private String color;
     private Integer weight;
 
