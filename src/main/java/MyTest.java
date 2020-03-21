@@ -79,6 +79,7 @@ public class MyTest {
         long endTime2 = System.currentTimeMillis();
         long costTime2 = endTime2 - startTime2;
         System.out.print("stringList.size()="+stringList.size()+",costTime2="+costTime2);
+        //使用json转换性能相差几十倍
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
