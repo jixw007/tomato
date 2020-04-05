@@ -1,3 +1,4 @@
+package com.tomato.mycode;
 import com.alibaba.fastjson.JSON;
 import org.springframework.context.annotation.Bean;
 

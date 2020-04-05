@@ -1,6 +1,13 @@
+package com.tomato.mycode;
+
 import com.alibaba.fastjson.JSON;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 
 import javax.annotation.PostConstruct;
 import java.lang.reflect.Field;
@@ -12,6 +19,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+@SpringBootApplication
 public class MyTest {
     public interface Predicate<T>{
         boolean Test(T t);
@@ -81,10 +89,23 @@ public class MyTest {
         //使用json转换性能相差几十倍
     }
 
+    @Value("${abm_nats_host_ip:}")
+    private static String abmNatsHostIp;
+
+//    @PostConstruct
+    public static void printValue(){
+        System.out.print("abmNatsHostIp="+abmNatsHostIp);
+    }
+
     public static void main(String[] args) throws ClassNotFoundException {
 
+        //2020年4月5日 springboot启动
+        SpringApplication.run(MyTest.class, args);
+        printValue();
+
+
         //JSON性能测试
-        jsonPerformanceTest();
+//        jsonPerformanceTest();
 
         //注解测试使用
 //        Class clazz = Class.forName("Apple");
