@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.lang.reflect.Field;
@@ -20,6 +22,8 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 @SpringBootApplication
+@Configuration
+@Component
 public class MyTest {
     public interface Predicate<T>{
         boolean Test(T t);
@@ -90,19 +94,17 @@ public class MyTest {
     }
 
     @Value("${abm_nats_host_ip:}")
-    private static String abmNatsHostIp;
+    private String abmNatsHostIp;
 
-//    @PostConstruct
-    public static void printValue(){
-        System.out.print("abmNatsHostIp="+abmNatsHostIp);
+    @PostConstruct
+    public void printValue(){
+        System.out.print("abmNatsHostIp="+abmNatsHostIp+"\n");
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
 
         //2020年4月5日 springboot启动
         SpringApplication.run(MyTest.class, args);
-        printValue();
-
 
         //JSON性能测试
 //        jsonPerformanceTest();
