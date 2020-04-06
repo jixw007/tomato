@@ -1,14 +1,13 @@
 package com.tomato.mycode;
 
 import com.alibaba.fastjson.JSON;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.*;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -99,12 +98,17 @@ public class MyTest {
     @PostConstruct
     public void printValue(){
         System.out.print("abmNatsHostIp="+abmNatsHostIp+"\n");
+        System.out.print("abmNatsHostIp2="+env.getProperty("abm_nats_host_ip")+"\n");
     }
+
+    @Autowired
+    private Environment env;
 
     public static void main(String[] args) throws ClassNotFoundException {
 
         //2020年4月5日 springboot启动
         SpringApplication.run(MyTest.class, args);
+
 
         //JSON性能测试
 //        jsonPerformanceTest();
