@@ -52,32 +52,12 @@ public class MyTest {
 //        exampleProcess.jsonPerformanceTest();
 
         //2020年4月7日 获取类注解信息测试
-        ExampleProcess exampleProcess = new ExampleProcess();
-        exampleProcess.annotationExampleTest();
+//        ExampleProcess exampleProcess = new ExampleProcess();
+//        exampleProcess.annotationExampleTest();
 
-//        Thread t1 = new Thread(() -> printApples("one"));
-//        Thread t2 = new Thread(() -> printApples("two"));
-//        t1.start();
-//        t2.start();
-
-//        String name = null;
-//        System.out.print("name=\n"+name);
-//        Optional name2 = Optional.ofNullagetColorble(name).orElse("hello");
-//        System.out.print("name2=\n"+name2);
-
-//        CountDownLatch latch = new CountDownLatch(10);
-
-//        Class cls = Class.forName("Apple");
-//        Field[] fields = cls.getDeclaredFields();
-//        for(Field f:fields){
-//            System.out.print("Field name="+f.getName());
-//            System.out.print(", type="+f.getType().toString());
-//            System.out.print("\n");
-//        }
-
-//        Thread t = new Thread(() -> System.out.print("hello world 1 !"));
-//        t.start();
-//        System.out.print("hello world 2 !");
+        //2020年4月7日 获线程启动使用测试
+//        ExampleProcess exampleProcess = new ExampleProcess();
+//        exampleProcess.threadExampleTest();
 
 //        List<Apple> apples = new ArrayList<Apple>();
 //        Apple apple1 = new Apple();

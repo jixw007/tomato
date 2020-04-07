@@ -68,5 +68,32 @@ public class ExampleProcess {
                 System.out.println("遍历:当前方法名为：" + allMethods[i].getName() + " 的注解信息：---" + methodAnno.name() + "---" + methodAnno.value() + "---" + methodAnno.path());
             }
         }
+
+        //        Class cls = Class.forName("Apple");
+//        Field[] fields = cls.getDeclaredFields();
+//        for(Field f:fields){
+//            System.out.print("Field name="+f.getName());
+//            System.out.print(", type="+f.getType().toString());
+//            System.out.print("\n");
+//        }
+    }
+
+    //线程启动使用测试
+    public void threadExampleTest() throws ClassNotFoundException {
+//        Thread t1 = new Thread(() -> printApples("one"));
+//        Thread t2 = new Thread(() -> printApples("two"));
+//        t1.start();
+//        t2.start();
+
+//        String name = null;
+//        System.out.print("name=\n"+name);
+//        Optional name2 = Optional.ofNullagetColorble(name).orElse("hello");
+//        System.out.print("name2=\n"+name2);
+
+//        CountDownLatch latch = new CountDownLatch(10);
+
+        Thread t = new Thread(() -> System.out.print("hello world one ,thread Id = "+Thread.currentThread().getId()+ "\n"));
+        t.start();
+        System.out.print("hello world two ,thread Id = "+Thread.currentThread().getId()+  "\n");
     }
 }
