@@ -1,22 +1,11 @@
 package com.tomato.mycode;
 
-import com.alibaba.fastjson.JSON;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.*;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 @SpringBootApplication
@@ -59,8 +48,8 @@ public class MyTest {
 //        SpringApplication.run(MyTest.class, args);
 
         //2020年4月7日 JSON性能测试
-//        AllTestProcess AllTestProcess = new AllTestProcess();
-//        AllTestProcess.jsonPerformanceTest();
+        ExampleProcess exampleProcess = new ExampleProcess();
+        exampleProcess.jsonPerformanceTest();
 
         //注解测试使用
 //        Class clazz = Class.forName("Apple");

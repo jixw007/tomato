@@ -5,13 +5,13 @@ import com.alibaba.fastjson.JSON;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllTestProcess {
+public class ExampleProcess {
 
     //JSON性能测试
-    public void jsonPerformanceTest(){
+    public void jsonPerformanceTest() {
         List<AcctBalanceInfoEntity> acctBalanceInfoEntityList = new ArrayList<AcctBalanceInfoEntity>();
         List<String> acctBalanceInfoEntityJsonList = new ArrayList<String>();
-        for(int i=0; i <100000; i++){
+        for (int i = 0; i < 100000; i++) {
             AcctBalanceInfoEntity acctBalanceInfoEntity = new AcctBalanceInfoEntity();
             acctBalanceInfoEntity.setlAcctBalanceID(1111L);
             acctBalanceInfoEntity.setlBalance(2222L);
@@ -26,7 +26,7 @@ public class AllTestProcess {
 
 
         long startTime = System.currentTimeMillis();
-        for(AcctBalanceInfoEntity acctBalanceInfoEntity: acctBalanceInfoEntityList){
+        for (AcctBalanceInfoEntity acctBalanceInfoEntity : acctBalanceInfoEntityList) {
             AcctBalanceInfoEntity acctBalanceInfoEntityTemp = new AcctBalanceInfoEntity();
             acctBalanceInfoEntityTemp.setlAcctBalanceID(acctBalanceInfoEntity.getlAcctBalanceID());
             acctBalanceInfoEntityTemp.setlBalance(acctBalanceInfoEntity.getlBalance());
@@ -36,17 +36,17 @@ public class AllTestProcess {
         }
         long endTime = System.currentTimeMillis();
         long costTime = endTime - startTime;
-        System.out.print("acctBalanceInfoEntityList.size()="+acctBalanceInfoEntityList.size()+",costTime="+costTime+"\n");
+        System.out.print("acctBalanceInfoEntityList.size()=" + acctBalanceInfoEntityList.size() + ",costTime=" + costTime + "\n");
 
         long startTime2 = System.currentTimeMillis();
-        for(String stringTemp: acctBalanceInfoEntityJsonList){
+        for (String stringTemp : acctBalanceInfoEntityJsonList) {
             AcctBalanceInfoEntity acctBalanceInfoEntityTemp = new AcctBalanceInfoEntity();
             acctBalanceInfoEntityTemp = JSON.parseObject(stringTemp, AcctBalanceInfoEntity.class);
         }
 
         long endTime2 = System.currentTimeMillis();
         long costTime2 = endTime2 - startTime2;
-        System.out.print("AcctBalanceInfoEntityJsonList.size()="+acctBalanceInfoEntityJsonList.size()+",costTime2="+costTime2);
+        System.out.print("AcctBalanceInfoEntityJsonList.size()=" + acctBalanceInfoEntityJsonList.size() + ",costTime2=" + costTime2);
         //使用json转换性能相差几十倍
     }
 }
