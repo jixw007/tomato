@@ -1,7 +1,7 @@
 package com.tomato.mycode;
 
 import com.alibaba.fastjson.JSON;
-
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,5 +48,25 @@ public class ExampleProcess {
         long costTime2 = endTime2 - startTime2;
         System.out.print("AcctBalanceInfoEntityJsonList.size()=" + acctBalanceInfoEntityJsonList.size() + ",costTime2=" + costTime2);
         //使用json转换性能相差几十倍
+    }
+
+
+    //获取类注解信息测试
+    public void annotationExampleTest() throws ClassNotFoundException {
+        //注解测试使用
+        Class clazz = Class.forName("com.tomato.mycode.Apple");
+
+        //获取类注解信息
+        AnnotationExample classAnno = (AnnotationExample) clazz.getAnnotation(AnnotationExample.class);
+        System.out.println(classAnno.name() + "---" + classAnno.value() + "---" + classAnno.path());
+
+        //获取所以方法注解信息 ps:这里需要使用 isAnnotationPresent 判断方法上是否使用了注解
+        Method[] allMethods = clazz.getDeclaredMethods();
+        for (int i = 0; i < allMethods.length; i++) {
+            if (allMethods[i].isAnnotationPresent(AnnotationExample.class)) {
+                AnnotationExample methodAnno = allMethods[i].getAnnotation(AnnotationExample.class);
+                System.out.println("遍历:当前方法名为：" + allMethods[i].getName() + " 的注解信息：---" + methodAnno.name() + "---" + methodAnno.value() + "---" + methodAnno.path());
+            }
+        }
     }
 }

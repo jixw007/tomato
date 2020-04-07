@@ -48,25 +48,12 @@ public class MyTest {
 //        SpringApplication.run(MyTest.class, args);
 
         //2020年4月7日 JSON性能测试
+//        ExampleProcess exampleProcess = new ExampleProcess();
+//        exampleProcess.jsonPerformanceTest();
+
+        //2020年4月7日 获取类注解信息测试
         ExampleProcess exampleProcess = new ExampleProcess();
-        exampleProcess.jsonPerformanceTest();
-
-        //注解测试使用
-//        Class clazz = Class.forName("Apple");
-//
-//        //获取类注解信息
-//        AnnotationExample classAnno =(AnnotationExample) clazz.getAnnotation(AnnotationExample.class);
-//        System.out.println( classAnno.name()+"---"+classAnno.value()+"---"+classAnno.path());
-//
-//        //获取所以方法注解信息 ps:这里需要使用 isAnnotationPresent 判断方法上是否使用了注解
-//        Method[] allMethods = clazz.getDeclaredMethods();
-//        for(int i=0;i<allMethods.length;i++){
-//            if(allMethods[i].isAnnotationPresent(AnnotationExample.class)) {
-//                AnnotationExample methodAnno = allMethods[i].getAnnotation(AnnotationExample.class);
-//                System.out.println("遍历:当前方法名为："+allMethods[i].getName()+" 的注解信息：---"+methodAnno.name() + "---" + methodAnno.value() + "---" + methodAnno.path());
-//            }
-//        }
-
+        exampleProcess.annotationExampleTest();
 
 //        Thread t1 = new Thread(() -> printApples("one"));
 //        Thread t2 = new Thread(() -> printApples("two"));
