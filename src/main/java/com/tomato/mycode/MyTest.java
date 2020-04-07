@@ -10,29 +10,9 @@ import java.util.concurrent.locks.ReentrantLock;
 
 @SpringBootApplication
 public class MyTest {
-    public interface Predicate<T>{
-        boolean Test(T t);
-    }
-
-    public static List<Apple> filterApples(List<Apple> apples, Predicate<Apple> p) {
-        List<Apple> resultApples = new ArrayList<Apple>();
-        for (Apple apple : apples) {
-            if (p.Test(apple)) {
-                resultApples.add(apple);
-            }
-        }
-        return resultApples;
-    }
-
-    public static void printApples(String number) {
-        ReentrantLock lock = new ReentrantLock(true);
-        lock.lock();
-        System.out.print("hello apples :"+ number+"\n");
-    }
-
     @PostConstruct
     public void printHelloWorld(){
-        System.out.print("hello world !\n");
+        System.out.print("hello world main !\n");
     }
 
     @Value("${abm_nats_host_ip:}")
@@ -59,21 +39,10 @@ public class MyTest {
 //        ExampleProcess exampleProcess = new ExampleProcess();
 //        exampleProcess.threadExampleTest();
 
-//        List<Apple> apples = new ArrayList<Apple>();
-//        Apple apple1 = new Apple();
-//        apple1.setColor("Green");
-//        apple1.setWeight(100);
-//        apple1.getWeight();
-//        apples.add(apple1);
-//
-//        Apple apple2 = new Apple();
-//        apple2.setColor("Red");
-//        apple2.setWeight(160);
-//        apples.add(apple2);
-//
-//        List<Apple> filterAppleResult = filterApples(apples, (Apple a)->"Green".equals(a.getColor()));
-//        System.out.print("filterAppleResult="+JSON.toJSONString(filterAppleResult));
-//
+        //2020年4月7日 苹果filterApples使用测试
+        ExampleProcess exampleProcess = new ExampleProcess();
+        exampleProcess.appleExampleTest1();
+
 //        ApplicationContext context = new AnnotationConfigApplicationContext(Apple.class);
 //        context.getBean("getWeight");
 //        context.getBean("getWeight");

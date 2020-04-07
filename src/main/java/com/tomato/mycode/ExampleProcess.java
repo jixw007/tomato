@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class ExampleProcess {
 
@@ -78,6 +79,12 @@ public class ExampleProcess {
 //        }
     }
 
+    public static void printApples(String number) {
+        ReentrantLock lock = new ReentrantLock(true);
+        lock.lock();
+        System.out.print("hello apples :"+ number+"\n");
+    }
+
     //线程启动使用测试
     public void threadExampleTest() throws ClassNotFoundException {
 //        Thread t1 = new Thread(() -> printApples("one"));
@@ -95,5 +102,37 @@ public class ExampleProcess {
         Thread t = new Thread(() -> System.out.print("hello world one ,thread Id = "+Thread.currentThread().getId()+ "\n"));
         t.start();
         System.out.print("hello world two ,thread Id = "+Thread.currentThread().getId()+  "\n");
+    }
+
+    public interface Predicate<T>{
+        boolean Test(T t);
+    }
+
+    public static List<Apple> filterApples(List<Apple> apples, Predicate<Apple> p) {
+        List<Apple> resultApples = new ArrayList<Apple>();
+        for (Apple apple : apples) {
+            if (p.Test(apple)) {
+                resultApples.add(apple);
+            }
+        }
+        return resultApples;
+    }
+
+    //filterApples测试
+    public void appleExampleTest1() {
+        List<Apple> apples = new ArrayList<Apple>();
+        Apple apple1 = new Apple();
+        apple1.setColor("Green");
+        apple1.setWeight(100);
+        apple1.getWeight();
+        apples.add(apple1);
+
+        Apple apple2 = new Apple();
+        apple2.setColor("Red");
+        apple2.setWeight(160);
+        apples.add(apple2);
+
+        List<Apple> filterAppleResult = filterApples(apples, (Apple a) -> "Green".equals(a.getColor()));
+        System.out.print("filterAppleResult=" + JSON.toJSONString(filterAppleResult));
     }
 }
