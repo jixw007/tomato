@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.stream.Collectors;
 
 public class ExampleProcess {
 
@@ -118,7 +119,7 @@ public class ExampleProcess {
         return resultApples;
     }
 
-    //filterApples测试
+    //filterApples测试：通过模版、lamdba
     public void appleExampleTest1() {
         List<Apple> apples = new ArrayList<Apple>();
         Apple apple1 = new Apple();
@@ -133,6 +134,9 @@ public class ExampleProcess {
         apples.add(apple2);
 
         List<Apple> filterAppleResult = filterApples(apples, (Apple a) -> "Green".equals(a.getColor()));
-        System.out.print("filterAppleResult=" + JSON.toJSONString(filterAppleResult));
+        System.out.print("filterAppleResult=" + JSON.toJSONString(filterAppleResult)+"\n");
+
+        List<Apple> filterAppleResult2 = apples.parallelStream().filter((Apple a) -> "Green".equals(a.getColor())).collect(Collectors.toList());
+        System.out.print("filterAppleResult2=" + JSON.toJSONString(filterAppleResult2)+"\n");
     }
 }

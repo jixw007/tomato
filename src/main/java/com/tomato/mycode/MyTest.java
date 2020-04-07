@@ -39,17 +39,12 @@ public class MyTest {
 //        ExampleProcess exampleProcess = new ExampleProcess();
 //        exampleProcess.threadExampleTest();
 
-        //2020年4月7日 苹果filterApples使用测试
+        //2020年4月7日 苹果filterApples使用测试：通过模版、lamdba
         ExampleProcess exampleProcess = new ExampleProcess();
         exampleProcess.appleExampleTest1();
 
 //        ApplicationContext context = new AnnotationConfigApplicationContext(Apple.class);
 //        context.getBean("getWeight");
 //        context.getBean("getWeight");
-//
-//        System.out.print("\n");
-//
-//        List<Apple> filterAppleResult2 = apples.parallelStream().filter((Apple a)->"Green".equals(a.getColor())).collect(Collectors.toList());
-//        System.out.print("filterAppleResult2="+JSON.toJSONString(filterAppleResult2));
     }
 }
