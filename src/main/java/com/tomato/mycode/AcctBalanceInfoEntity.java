@@ -1,16 +1,10 @@
 package com.tomato.mycode;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
-@Component
 public class AcctBalanceInfoEntity {
     private Long  lAcctBalanceID;
     private Long  lBalanceTypeId;
     private Long  lBalance;
     private Long  lNewBalance;
-
-    @Value("${abm_nats_host_ip:}")
     private String sCorpusFlag;
 
     public Long getlAcctBalanceID() {

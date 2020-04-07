@@ -7,7 +7,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.*;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -21,8 +20,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 @SpringBootApplication
-@Configuration
-@Component
 public class MyTest {
     public interface Predicate<T>{
         boolean Test(T t);
@@ -49,69 +46,21 @@ public class MyTest {
         System.out.print("hello world !\n");
     }
 
-    //JSON性能测试
-     public static void jsonPerformanceTest(){
-        List<AcctBalanceInfoEntity> acctBalanceInfoEntityList = new ArrayList<AcctBalanceInfoEntity>();
-        List<String> stringList = new ArrayList<String>();
-        for(int i=0; i <100000; i++){
-            AcctBalanceInfoEntity acctBalanceInfoEntity = new AcctBalanceInfoEntity();
-            acctBalanceInfoEntity.setlAcctBalanceID(1111L);
-            acctBalanceInfoEntity.setlBalance(2222L);
-            acctBalanceInfoEntity.setlBalanceTypeId(3333L);
-            acctBalanceInfoEntity.setlNewBalance(4444L);
-            acctBalanceInfoEntity.setsCorpusFlag("6666");
-            acctBalanceInfoEntityList.add(acctBalanceInfoEntity);
-
-            String stringTemp = JSON.toJSONString(acctBalanceInfoEntity);
-            stringList.add(stringTemp);
-        }
-
-
-        long startTime = System.currentTimeMillis();
-        for(AcctBalanceInfoEntity acctBalanceInfoEntity: acctBalanceInfoEntityList){
-            AcctBalanceInfoEntity acctBalanceInfoEntityTemp = new AcctBalanceInfoEntity();
-            acctBalanceInfoEntityTemp.setlAcctBalanceID(acctBalanceInfoEntity.getlAcctBalanceID());
-            acctBalanceInfoEntityTemp.setlBalance(acctBalanceInfoEntity.getlBalance());
-            acctBalanceInfoEntityTemp.setlBalanceTypeId(acctBalanceInfoEntity.getlBalanceTypeId());
-            acctBalanceInfoEntityTemp.setlNewBalance(acctBalanceInfoEntity.getlNewBalance());
-            acctBalanceInfoEntityTemp.setsCorpusFlag(acctBalanceInfoEntity.getsCorpusFlag());
-        }
-        long endTime = System.currentTimeMillis();
-        long costTime = endTime - startTime;
-        System.out.print("acctBalanceInfoEntityList.size()="+acctBalanceInfoEntityList.size()+",costTime="+costTime+"\n");
-
-        long startTime2 = System.currentTimeMillis();
-        for(String stringTemp: stringList){
-            AcctBalanceInfoEntity acctBalanceInfoEntityTemp = new AcctBalanceInfoEntity();
-            acctBalanceInfoEntityTemp = JSON.parseObject(stringTemp, AcctBalanceInfoEntity.class);
-        }
-
-        long endTime2 = System.currentTimeMillis();
-        long costTime2 = endTime2 - startTime2;
-        System.out.print("stringList.size()="+stringList.size()+",costTime2="+costTime2);
-        //使用json转换性能相差几十倍
-    }
-
     @Value("${abm_nats_host_ip:}")
     private String abmNatsHostIp;
 
     @PostConstruct
     public void printValue(){
         System.out.print("abmNatsHostIp="+abmNatsHostIp+"\n");
-        System.out.print("abmNatsHostIp2="+env.getProperty("abm_nats_host_ip")+"\n");
     }
 
-    @Autowired
-    private Environment env;
-
     public static void main(String[] args) throws ClassNotFoundException {
-
         //2020年4月5日 springboot启动
-        SpringApplication.run(MyTest.class, args);
+//        SpringApplication.run(MyTest.class, args);
 
-
-        //JSON性能测试
-//        jsonPerformanceTest();
+        //2020年4月7日 JSON性能测试
+//        AllTestProcess AllTestProcess = new AllTestProcess();
+//        AllTestProcess.jsonPerformanceTest();
 
         //注解测试使用
 //        Class clazz = Class.forName("Apple");
@@ -177,7 +126,5 @@ public class MyTest {
 //
 //        List<Apple> filterAppleResult2 = apples.parallelStream().filter((Apple a)->"Green".equals(a.getColor())).collect(Collectors.toList());
 //        System.out.print("filterAppleResult2="+JSON.toJSONString(filterAppleResult2));
-
-
     }
 }
