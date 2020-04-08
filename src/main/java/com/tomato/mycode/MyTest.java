@@ -1,12 +1,9 @@
 package com.tomato.mycode;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.locks.ReentrantLock;
 
 @SpringBootApplication
 public class MyTest {
@@ -25,7 +22,8 @@ public class MyTest {
 
     public static void main(String[] args) throws ClassNotFoundException {
         //2020年4月5日 springboot启动
-//        SpringApplication.run(MyTest.class, args);
+        SpringApplication.run(MyTest.class, args);
+        System.out.print("********启动成功****************!\n");
 
         //2020年4月7日 JSON性能测试
 //        ExampleProcess exampleProcess = new ExampleProcess();
@@ -40,8 +38,8 @@ public class MyTest {
 //        exampleProcess.threadExampleTest();
 
         //2020年4月7日 苹果filterApples使用测试：通过模版、lamdba
-        ExampleProcess exampleProcess = new ExampleProcess();
-        exampleProcess.appleExampleTest1();
+//        ExampleProcess exampleProcess = new ExampleProcess();
+//        exampleProcess.appleExampleTest1();
 
 //        ApplicationContext context = new AnnotationConfigApplicationContext(Apple.class);
 //        context.getBean("getWeight");
