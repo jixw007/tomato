@@ -22,8 +22,13 @@ public class MyTest {
 
     public static void main(String[] args) throws ClassNotFoundException {
         //2020年4月5日 springboot启动
-        SpringApplication.run(MyTest.class, args);
-        System.out.print("********启动成功****************!\n");
+//        SpringApplication.run(MyTest.class, args);
+//        System.out.print("********启动成功****************!\n");
+
+//        for (int i = 0; i < 10000000; i++) {
+//            Apple Apple = new Apple();
+//            System.out.print("this is number {"+i+"}\n");
+//        }
 
         //2020年4月7日 JSON性能测试
 //        ExampleProcess exampleProcess = new ExampleProcess();
