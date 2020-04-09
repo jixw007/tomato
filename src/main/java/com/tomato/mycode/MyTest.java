@@ -49,5 +49,7 @@ public class MyTest {
 //        ApplicationContext context = new AnnotationConfigApplicationContext(Apple.class);
 //        context.getBean("getWeight");
 //        context.getBean("getWeight");
+
+        //测试Aspect
     }
 }
