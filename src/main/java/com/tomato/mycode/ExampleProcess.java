@@ -139,4 +139,9 @@ public class ExampleProcess {
         List<Apple> filterAppleResult2 = apples.parallelStream().filter((Apple a) -> "Green".equals(a.getColor())).collect(Collectors.toList());
         System.out.print("filterAppleResult2=" + JSON.toJSONString(filterAppleResult2)+"\n");
     }
+
+    //2020年4月10日 测试AOP面向切面编程
+    public void aopExampleTest1() {
+        System.out.print("hello my name is aopExampleTest1 !\n");
+    }
 }

@@ -3,9 +3,14 @@ package com.tomato.mycode;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+
 import javax.annotation.PostConstruct;
 
 @SpringBootApplication
+@ComponentScan("com.tomato.mycode")
+@EnableAspectJAutoProxy(proxyTargetClass=true)
 public class MyTest {
     @PostConstruct
     public void printHelloWorld(){
@@ -22,8 +27,8 @@ public class MyTest {
 
     public static void main(String[] args) throws ClassNotFoundException {
         //2020年4月5日 springboot启动
-//        SpringApplication.run(MyTest.class, args);
-//        System.out.print("********启动成功****************!\n");
+        SpringApplication.run(MyTest.class, args);
+        System.out.print("********启动成功****************!\n");
 
 //        for (int i = 0; i < 10000000; i++) {
 //            Apple Apple = new Apple();
@@ -50,8 +55,9 @@ public class MyTest {
 //        context.getBean("getWeight");
 //        context.getBean("getWeight");
 
-        //2020年4月10日 测试AOP面向切面编程,Aspect
+        //2020年4月10日 测试AOP面向切面编程
         //可以用来配置事务、做日志、权限验证、在用户请求时做一些处理
+        //HelloController通过springboot容器启动测试
 
         //测试数据库连接
 
