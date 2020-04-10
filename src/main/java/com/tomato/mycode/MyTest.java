@@ -50,6 +50,11 @@ public class MyTest {
 //        context.getBean("getWeight");
 //        context.getBean("getWeight");
 
-        //测试Aspect
+        //2020年4月10日 测试AOP面向切面编程,Aspect
+        //可以用来配置事务、做日志、权限验证、在用户请求时做一些处理
+
+        //测试数据库连接
+
+        //测试动态多数据源
     }
 }
