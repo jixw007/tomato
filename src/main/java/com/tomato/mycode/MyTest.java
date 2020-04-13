@@ -9,7 +9,6 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import javax.annotation.PostConstruct;
 
 @SpringBootApplication
-@ComponentScan("com.tomato.mycode")
 @EnableAspectJAutoProxy(proxyTargetClass=true)
 public class MyTest {
     @PostConstruct
