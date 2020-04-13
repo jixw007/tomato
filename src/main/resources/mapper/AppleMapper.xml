@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tomato.mycode.mapper.AppleMapper">
+    <resultMap id="AppleMap" type="com.tomato.mycode.Apple">
+        <result property="appleId" column="APPLE_ID"/>
+        <result property="color" column="COLOR"/>
+        <result property="weight" column="WEIGHT"/>
+    </resultMap>
+
+    <select id="queryApple" resultMap="AppleMap">
+    SELECT A.APPLE_ID,
+           A.COLOR,
+           A.WEIGHT
+      FROM A_APPLE A
+     WHERE A.APPLE_ID = #{appleId}
+	</select>
+
+
+</mapper>

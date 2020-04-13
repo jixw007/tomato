@@ -1,5 +1,6 @@
 package com.tomato.mycode;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,10 +10,11 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import javax.annotation.PostConstruct;
 
 @SpringBootApplication
-@EnableAspectJAutoProxy(proxyTargetClass=true)
+@EnableAspectJAutoProxy(proxyTargetClass = true)
+@MapperScan({"com.tomato.mycode.mapper"})
 public class MyTest {
     @PostConstruct
-    public void printHelloWorld(){
+    public void printHelloWorld() {
         System.out.print("hello world main !\n");
     }
 
@@ -20,8 +22,8 @@ public class MyTest {
     private String abmNatsHostIp;
 
     @PostConstruct
-    public void printValue(){
-        System.out.print("abmNatsHostIp="+abmNatsHostIp+"\n");
+    public void printValue() {
+        System.out.print("abmNatsHostIp=" + abmNatsHostIp + "\n");
     }
 
     public static void main(String[] args) throws ClassNotFoundException {

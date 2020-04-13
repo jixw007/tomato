@@ -14,7 +14,7 @@ public class SimpleAspect {
      * 表达式代表切入com..service包下的所有类的所有方法，方法参数不限，返回类型不限。
      * 其中访问修饰符可以不写，不能用*，，第一个*代表返回类型不限，第二个*表示所有类，第三个*表示所有方法，..两个点表示方法里的参数不限。
      */
-    private final String POINT_CUT = "execution(public String com.tomato.mycode.HelloController.index())";
+    private final String POINT_CUT = "execution(public String com.tomato.mycode.controller.HelloController.index())";
 
     /**
      * 命名切点
