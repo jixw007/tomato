@@ -31,7 +31,6 @@ public class HelloController {
         Apple apple = appleDao.queryAppleInfo(11L);
 
         System.out.println("hello my name is apple,apple="+ JSON.toJSONString(apple)+" ! ");
-//        return new ModelAndView("appleinfo", "apple", apple);
         HttpStatus status = HttpStatus.OK;
         String body = JSON.toJSONString(apple);
         HttpHeaders httpHeaders = new HttpHeaders();
