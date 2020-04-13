@@ -60,7 +60,7 @@ public class MyTest {
         //可以用来配置事务、做日志、权限验证、在用户请求时做一些处理
         //HelloController通过springboot容器启动测试
 
-        //测试数据库连接
+        //2020年4月13日 测试用mybatis做数据库连接--测试ok
 
         //测试动态多数据源
     }
