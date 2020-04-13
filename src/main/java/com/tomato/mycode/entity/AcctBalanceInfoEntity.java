@@ -1,4 +1,4 @@
-package com.tomato.mycode;
+package com.tomato.mycode.entity;
 
 public class AcctBalanceInfoEntity {
     private Long  lAcctBalanceID;

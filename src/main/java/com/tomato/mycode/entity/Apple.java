@@ -1,4 +1,4 @@
-package com.tomato.mycode;
+package com.tomato.mycode.entity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.tomato.mycode.mapper;
 
-import com.tomato.mycode.Apple;
+import com.tomato.mycode.entity.Apple;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.dao.DataAccessException;

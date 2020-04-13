@@ -1,6 +1,9 @@
 package com.tomato.mycode;
 
 import com.alibaba.fastjson.JSON;
+import com.tomato.mycode.entity.AcctBalanceInfoEntity;
+import com.tomato.mycode.entity.Apple;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +59,7 @@ public class ExampleProcess {
     //获取类注解信息测试
     public void annotationExampleTest() throws ClassNotFoundException {
         //注解测试使用
-        Class clazz = Class.forName("com.tomato.mycode.Apple");
+        Class clazz = Class.forName("com.tomato.mycode.entity.Apple");
 
         //获取类注解信息
         AnnotationExample classAnno = (AnnotationExample) clazz.getAnnotation(AnnotationExample.class);
