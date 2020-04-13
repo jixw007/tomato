@@ -1,12 +1,21 @@
 package com.tomato.mycode;
-import org.springframework.context.annotation.Bean;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@AnnotationExample(name="Apple",value="class",path="com.alibaba.fastjson.JSON")
 public class Apple {
-    @AnnotationExample(name="getColor",value="function",path="com.alibaba.fastjson.JSON")
+    private Long appleId;
+    private String color;
+    private Integer weight;
+
+    public Long getAppleId() {
+        return appleId;
+    }
+
+    public void setAppleId(Long appleId) {
+        this.appleId = appleId;
+    }
+
     public String getColor() {
         return color;
     }
@@ -15,9 +24,7 @@ public class Apple {
         this.color = color;
     }
 
-    @Bean
     public Integer getWeight() {
-        System.out.print("hello getWeight!\n");
         return weight;
     }
 
@@ -25,16 +32,12 @@ public class Apple {
         this.weight = weight;
     }
 
-    @AnnotationExample(name="color",value="filed",path="com.alibaba.fastjson.JSON")
-    private String color;
-    private Integer weight;
-
-    public static boolean isGreenApple(Apple apple){
+    public static boolean isGreenApple(Apple apple) {
         return "Green".equals(apple.getColor());
     }
 
-    public static boolean isHeavyApple(Apple apple){
-        return apple.getWeight()>150;
+    public static boolean isHeavyApple(Apple apple) {
+        return apple.getWeight() > 150;
     }
 
     //颜色绿色
