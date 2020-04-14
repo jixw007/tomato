@@ -16,9 +16,6 @@ import javax.sql.DataSource;
  */
 @Configuration
 public class RouteHolderConfig {
-    DataSource oneDataSource;
-    DataSource twoDataSource;
-
     /**
      * 创建 DataSource Bean
      * */
@@ -26,7 +23,7 @@ public class RouteHolderConfig {
     @Bean(name="db1")
     @ConfigurationProperties(prefix = "spring.datasource.druid.db1")
     public DataSource oneDataSource(){
-        oneDataSource = DruidDataSourceBuilder.create().build();
+        DataSource oneDataSource = DruidDataSourceBuilder.create().build();
         System.out.println("RouteHolderConfig:oneDataSource:builded");
         return oneDataSource;
     }
@@ -34,7 +31,7 @@ public class RouteHolderConfig {
     @Bean(name="db2")
     @ConfigurationProperties(prefix = "spring.datasource.druid.db2")
     public DataSource twoDataSource(){
-        twoDataSource = DruidDataSourceBuilder.create().build();
+        DataSource twoDataSource = DruidDataSourceBuilder.create().build();
         System.out.println("RouteHolderConfig:twoDataSource:builded");
         return twoDataSource;
     }
@@ -44,9 +41,7 @@ public class RouteHolderConfig {
      * */
     @Bean
     @Primary
-    public ChooseDataSource dataSource() {
-        oneDataSource();
-        twoDataSource();
+    public ChooseDataSource dataSource(@Qualifier("db1")DataSource oneDataSource, @Qualifier("db2")DataSource twoDataSource) {
         Map<Object, Object> targetDataSources = new HashMap<>(2);
         targetDataSources.put("db1", oneDataSource);
         targetDataSources.put("db2", twoDataSource);
