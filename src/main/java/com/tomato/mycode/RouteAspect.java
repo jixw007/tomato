@@ -13,9 +13,10 @@ import java.lang.reflect.Method;
 @Aspect
 @Component
 public class RouteAspect {
-    public RouteAspect(){
-        System.out.println("SimpleAspect initing ,thread_id="+Thread.currentThread().getId());
+    public RouteAspect() {
+        System.out.println("SimpleAspect initing ,thread_id=" + Thread.currentThread().getId());
     }
+
     /**
      * 切点表达式:
      * ..两个点表明多个，*代表一个
@@ -130,6 +131,4 @@ public class RouteAspect {
         System.out.println("@Around：切点方法环绕end.....");
         return o;
     }
-
-
 }
