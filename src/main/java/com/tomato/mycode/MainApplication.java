@@ -69,5 +69,9 @@ public class MainApplication {
         //2020年4月13日 测试用mybatis做数据库连接--测试ok
 
         //2020年4月20日 测试动态多数据源 --测试ok
+
+        //需要了解具体ChooseDataSource底层具体路由过程
+
+        //@NotNull 和 @Nullable使用
     }
 }
