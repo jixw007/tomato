@@ -1,20 +1,28 @@
 package com.tomato.mycode;
 
+import com.tomato.mycode.untils.dataroute.RouteHolder;
+import com.tomato.mycode.untils.dataroute.RouteSource;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
+
+import java.lang.reflect.Method;
 
 @Aspect
 @Component
-public class SimpleAspect {
+public class RouteAspect {
+    public RouteAspect(){
+        System.out.println("SimpleAspect initing ,thread_id="+Thread.currentThread().getId());
+    }
     /**
      * 切点表达式:
      * ..两个点表明多个，*代表一个
      * 表达式代表切入com..service包下的所有类的所有方法，方法参数不限，返回类型不限。
      * 其中访问修饰符可以不写，不能用*，，第一个*代表返回类型不限，第二个*表示所有类，第三个*表示所有方法，..两个点表示方法里的参数不限。
      */
-    private final String POINT_CUT = "execution(public String com.tomato.mycode.controller.HelloController.index())";
+    private final String POINT_CUT = "execution(public * com.tomato.mycode.service.AppleServiceImpl.getApple2ById(Long))";
 
     /**
      * 命名切点
@@ -38,7 +46,26 @@ public class SimpleAspect {
      */
     @Before(value = "pointCut()")
     public void doBefore(JoinPoint joinPoint) {
-        System.out.println("@Before：切点方法之前执行.....,thread_id="+Thread.currentThread().getId());
+        System.out.println("@Before：切点方法之前执行.....,thread_id=" + Thread.currentThread().getId());
+        Object target = joinPoint.getTarget();
+        String method = joinPoint.getSignature().getName();
+        Class<?>[] classz = target.getClass().getInterfaces();
+        Class<?>[] parameterTypes = ((MethodSignature) joinPoint.getSignature())
+                .getMethod().getParameterTypes();
+        try {
+            if (classz != null && classz.length > 0) {
+                Method m = classz[0].getMethod(method, parameterTypes);
+                System.out.println("RouteSourceAspect:Before:getMethod= " + m);
+                System.out.println("RouteSourceAspect:Before:isAnnotationPresent= " + m.isAnnotationPresent(RouteSource.class));
+                if (m != null && m.isAnnotationPresent(RouteSource.class)) {
+                    RouteSource data = m.getAnnotation(RouteSource.class);
+                    System.out.println("RouteSourceAspect:Before:current data source is " + data.value());
+                    RouteHolder.setRouteKey(data.value());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -103,4 +130,6 @@ public class SimpleAspect {
         System.out.println("@Around：切点方法环绕end.....");
         return o;
     }
+
+
 }

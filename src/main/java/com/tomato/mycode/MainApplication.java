@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 
@@ -19,7 +18,7 @@ import javax.annotation.PostConstruct;
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @MapperScan({"com.tomato.mycode.mapper"})
-public class MyTest {
+public class MainApplication {
     @PostConstruct
     public void printHelloWorld() {
         System.out.print("hello world main !\n");
@@ -35,7 +34,7 @@ public class MyTest {
 
     public static void main(String[] args) throws ClassNotFoundException {
         //2020年4月5日 springboot启动
-        SpringApplication.run(MyTest.class, args);
+        SpringApplication.run(MainApplication.class, args);
         System.out.print("********启动成功****************!\n");
 
 //        for (int i = 0; i < 10000000; i++) {
@@ -69,6 +68,6 @@ public class MyTest {
 
         //2020年4月13日 测试用mybatis做数据库连接--测试ok
 
-        //测试动态多数据源
+        //2020年4月20日 测试动态多数据源 --测试ok
     }
 }

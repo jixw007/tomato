@@ -54,7 +54,7 @@ public class HelloController {
     @RequestMapping("/get_apple2")
     public ResponseEntity getApple2(){
         System.out.println("hello my name is apple2,thread_id="+Thread.currentThread().getId()+" ! ");
-        Apple apple = apppleService.getApple2ById(11L);
+        Apple apple = apppleService.getApple2ById(44L);
 
         System.out.println("hello my name is apple2,apple="+ JSON.toJSONString(apple)+" ! ");
         HttpStatus status = HttpStatus.OK;
