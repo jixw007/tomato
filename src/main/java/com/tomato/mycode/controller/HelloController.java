@@ -17,34 +17,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HelloController {
     private static final Logger logger = LoggerFactory.getLogger(HelloController.class);
     @Autowired
-    public AppleDao appleDao;
-    @Autowired
     public ApppleService apppleService;
 
     @RequestMapping("/index")
-    public String index(){
-        System.out.println("hello my name is HelloController-index,thread_id="+Thread.currentThread().getId()+" ! ");
+    public String index() {
+        System.out.println("hello my name is HelloController-index,thread_id=" + Thread.currentThread().getId() + " ! ");
         return "index";
     }
 
-    @RequestMapping("/get_apple")
-    public ResponseEntity getApple(){
-        System.out.println("hello my name is apple,thread_id="+Thread.currentThread().getId()+" ! ");
-        Apple apple = appleDao.queryAppleInfo(11L);
-
-        System.out.println("hello my name is apple,apple="+ JSON.toJSONString(apple)+" ! ");
-        HttpStatus status = HttpStatus.OK;
-        String body = JSON.toJSONString(apple);
-        HttpHeaders httpHeaders = new HttpHeaders();
-        return new ResponseEntity<>(body, httpHeaders, status);
-    }
-
     @RequestMapping("/get_apple1")
-    public ResponseEntity getApple1(){
-        System.out.println("hello my name is apple1,thread_id="+Thread.currentThread().getId()+" ! ");
+    public ResponseEntity getApple1() {
+        System.out.println("hello my name is apple1,thread_id=" + Thread.currentThread().getId() + " ! ");
         Apple apple = apppleService.getAppleById(11L);
 
-        System.out.println("hello my name is apple1,apple="+ JSON.toJSONString(apple)+" ! ");
+        System.out.println("hello my name is apple1,apple=" + JSON.toJSONString(apple) + " ! ");
         HttpStatus status = HttpStatus.OK;
         String body = JSON.toJSONString(apple);
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -52,11 +38,11 @@ public class HelloController {
     }
 
     @RequestMapping("/get_apple2")
-    public ResponseEntity getApple2(){
-        System.out.println("hello my name is apple2,thread_id="+Thread.currentThread().getId()+" ! ");
+    public ResponseEntity getApple2() {
+        System.out.println("hello my name is apple2,thread_id=" + Thread.currentThread().getId() + " ! ");
         Apple apple = apppleService.getApple2ById(44L);
 
-        System.out.println("hello my name is apple2,apple="+ JSON.toJSONString(apple)+" ! ");
+        System.out.println("hello my name is apple2,apple=" + JSON.toJSONString(apple) + " ! ");
         HttpStatus status = HttpStatus.OK;
         String body = JSON.toJSONString(apple);
         HttpHeaders httpHeaders = new HttpHeaders();
