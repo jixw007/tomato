@@ -12,13 +12,11 @@ public class AppleServiceImpl implements ApppleService {
     public AppleDao appleDao;
 
     @Override
-    @RouteSource("db1")
     public Apple getAppleById(Long appleId) {
         return appleDao.queryAppleInfo(appleId);
     }
 
     @Override
-    @RouteSource("db2")
     public Apple getApple2ById(Long appleId) {
         return appleDao.queryAppleInfo(appleId);
     }
