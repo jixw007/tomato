@@ -1,6 +1,7 @@
 package com.tomato.mycode;
 
 import com.tomato.mycode.untils.dataroute.RouteHolderConfig;
+import org.apache.commons.lang3.mutable.MutableLong;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -11,6 +12,8 @@ import org.springframework.context.annotation.Import;
 
 import javax.annotation.PostConstruct;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 动态数据源配置,需要将自有的配置依赖(DynamicDataSourceConfig),将原有的依赖去除(DataSourceAutoConfiguration)
@@ -35,8 +38,8 @@ public class MainApplication {
 
     public static void main(String[] args) throws ClassNotFoundException {
         //2020年4月5日 springboot启动
-        SpringApplication.run(MainApplication.class, args);
-        System.out.print("********启动成功****************!\n");
+//        SpringApplication.run(MainApplication.class, args);
+//        System.out.print("********启动成功****************!\n");
 
 //        for (int i = 0; i < 10000000; i++) {
 //            Apple Apple = new Apple();
@@ -74,5 +77,7 @@ public class MainApplication {
         //需要了解具体ChooseDataSource底层具体路由过程
 
         //@NotNull 和 @Nullable使用
+
+
     }
 }

@@ -3,6 +3,7 @@ package com.tomato.mycode;
 import com.alibaba.fastjson.JSON;
 import com.tomato.mycode.entity.AcctBalanceInfoEntity;
 import com.tomato.mycode.entity.Apple;
+import org.apache.commons.lang3.mutable.MutableLong;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -146,5 +147,12 @@ public class ExampleProcess {
     //2020年4月10日 测试AOP面向切面编程
     public void aopExampleTest1() {
         System.out.print("hello my name is aopExampleTest1 !\n");
+    }
+
+    public void exampleTest1(MutableLong lCurrentAcctId) throws Exception {
+        lCurrentAcctId.setValue(88888L);
+        System.out.print("hello my name is aopExampleTest1 !\n");
+        throw new Exception(); //抛出异常
+
     }
 }
