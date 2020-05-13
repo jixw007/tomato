@@ -1,6 +1,7 @@
-package com.tomato.mycode;
+package com.tomato.mycode.tomatotest;
 
 import com.alibaba.fastjson.JSON;
+import com.tomato.mycode.AnnotationExample;
 import com.tomato.mycode.entity.AcctBalanceInfoEntity;
 import com.tomato.mycode.entity.Apple;
 import org.apache.commons.lang3.mutable.MutableLong;
