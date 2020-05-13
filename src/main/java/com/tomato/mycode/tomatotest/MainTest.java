@@ -1,4 +1,4 @@
-package com.tomato.mycode;
+package com.tomato.mycode.tomatotest;
 
 public class MainTest {
     public static void main(String[] args) {
