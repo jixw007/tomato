@@ -8,8 +8,6 @@ public class AtomicTest {
 
     public static void main(String[] args) throws InterruptedException {
         AtomicInteger atomicIntegerCount = new AtomicInteger(0);
-//        atomicInteger.incrementAndGet();
-//        System.out.printf("atomicInteger=%d\n",atomicInteger.get());
 
         System.out.printf("begin  integerCount=%d, atomicInteger=%d\n", integerCount, atomicIntegerCount.get());
 
