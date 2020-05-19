@@ -1,10 +1,12 @@
 package com.tomato.mycode.tomatotest;
 
 
+import org.I0Itec.zkclient.ZkClient;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 import org.apache.curator.retry.RetryNTimes;
+import org.apache.zookeeper.data.Stat;
 
 import java.util.concurrent.TimeUnit;
 
@@ -36,7 +38,7 @@ public class zookeeperTest {
         }
     }
 
-    public static void main(String[] args) {
+    private static void distributedLock() {
         // 1.Connect to zk
         CuratorFramework client = CuratorFrameworkFactory.newClient(
                 ZK_ADDRESS,
@@ -63,5 +65,31 @@ public class zookeeperTest {
             }, name);
             t.start();
         }
+    }
+
+    private static void distributedConfig() {
+        ZkClient zk = new ZkClient("192.168.137.1:2181");
+        if (!zk.exists("/zkConfig")) {
+            zk.createPersistent("/zkConfig", true);
+        }
+        zk.writeData("/zkConfig", "hello world!");
+
+        /**
+         * 读取数据对象
+         */
+        Stat stat = new Stat();
+        String temp = zk.readData("/zkConfig", stat);
+        System.out.println("**temp=" + temp);
+
+        zk.close();
+    }
+
+    public static void main(String[] args) {
+
+        //通过zookeeper的开源工具Curator实现分布式锁
+        //distributedLock();
+
+        distributedConfig();
+
     }
 }
