@@ -1,6 +1,6 @@
 package com.tomato.mycode.tomatotest;
 
-public class ThreadTest {
+public class ThreadDemo {
     public static void main(String[] args) {
 
     }

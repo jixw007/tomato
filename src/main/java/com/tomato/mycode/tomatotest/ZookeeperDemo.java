@@ -11,7 +11,7 @@ import org.apache.zookeeper.data.Stat;
 import java.util.concurrent.TimeUnit;
 
 //curator框架实现zookeeper客户端开源实现
-public class zookeeperTest {
+public class ZookeeperDemo {
     /**
      * Zookeeper info
      */

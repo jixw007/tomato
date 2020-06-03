@@ -3,7 +3,7 @@ package com.tomato.mycode.tomatotest;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class AtomicTest {
+public class AtomicDemo {
     public static Integer integerCount = 0;
 
     private static void printinfo(int step) {
