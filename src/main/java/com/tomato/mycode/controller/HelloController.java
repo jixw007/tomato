@@ -35,6 +35,7 @@ public class HelloController {
     public ResponseEntity getApple1(HttpServletRequest request) {
         //http://localhost:8094/get_apple1
         HttpSession session = request.getSession();
+        session.setAttribute("apple1","jixw");
         System.out.println("hello my name is apple1,session id=" + session.getId() + " ! ");
 
         Cookie[] cookies = request.getCookies();
