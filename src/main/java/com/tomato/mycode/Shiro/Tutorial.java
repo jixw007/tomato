@@ -36,7 +36,7 @@ public class Tutorial {
 
         // let's login the current user so we can check against roles and permissions:
         if (!currentUser.isAuthenticated()) {
-            UsernamePasswordToken token = new UsernamePasswordToken("lonestarr", "vespa");
+            UsernamePasswordToken token = new UsernamePasswordToken("lonestarr", "vespa1");
             token.setRememberMe(true);
             try {
                 currentUser.login(token);

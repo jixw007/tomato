@@ -1,8 +1,8 @@
 package com.tomato.mycode.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.tomato.mycode.Shiro.AuthServiceImpl;
 import com.tomato.mycode.entity.Apple;
-import com.tomato.mycode.dao.AppleDao;
 import com.tomato.mycode.service.ApppleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,27 +56,41 @@ public class HelloController {
     @ResponseBody
     @RequestMapping("/get_apple2")
     public String getApple2(HttpServletRequest request, HttpServletResponse response) {
-        //http://localhost:8094/get_apple2
-        HttpSession session = request.getSession();
-        System.out.println("hello my name is apple2,session id=" + session.getId() + " ! ");
+        //http://localhost:8094/get_apple2?account=jixw&password=me&appleId=222
+        //HttpSession session = request.getSession();
+        //System.out.println("hello my name is apple2,session id=" + session.getId() + " ! ");
 
+        //coookie
         Cookie[] cookies = request.getCookies();
         if (null == cookies) {
-            System.out.println("hello my name is apple2,cookies is null ! ");
+            System.out.println("apple2: cookies is null ! ");
         }else{
-            System.out.println("hello my name is apple2, have a cookie  ! ");
+            System.out.println("apple2: have a cookie  ! ");
             for( Cookie cookie : cookies){
                 System.out.println("--- cookie.name="+cookie.getName()+",cookie.value="+cookie.getValue());
             }
         }
 
-        System.out.println("hello my name is apple2,thread_id=" + Thread.currentThread().getId() + " ! ");
-        Apple apple = apppleService.getApple2ById(44L);
+        String account=request.getParameter("account");
+        String password=request.getParameter("password");
+        String appleId=request.getParameter("appleId");
+        logger.info("apple2: account={},password={},appleId={}", account, password, appleId);
 
-        System.out.println("hello my name is apple2,apple=" + JSON.toJSONString(apple) + " ! ");
+        //登录验证
+        AuthServiceImpl authServiceImpl = new AuthServiceImpl();
+        authServiceImpl.Longin(account, password);
+
+        Apple apple = apppleService.getApple2ById(Long.parseLong(appleId));
+
+        System.out.println("apple2: appleInfo=" + JSON.toJSONString(apple) + " ! ");
+
+        //设置cookie
         Cookie cookie_username = new Cookie("get_apple2", "jixw11");
         cookie_username.setMaxAge(30 * 24 * 60 * 60);
         response.addCookie(cookie_username);
-        return "hello , I am Apple2 !";
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("application/json;charset=UTF-8");
+        String body = JSON.toJSONString(apple);
+        return body;
     }
 }
