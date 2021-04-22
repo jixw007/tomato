@@ -61,18 +61,16 @@ public class HelloController {
     @ResponseBody
     @RequestMapping("/get_apple2")
     public String getApple2(HttpServletRequest request, HttpServletResponse response) {
-        //http://localhost:8094/get_apple2?account=jixw&password=me&appleId=222
+        //http://localhost:8094/get_apple2?account=jixw&password=me&appleId=44
+        String body = null;
+
         HttpSession session = request.getSession();
         System.out.println("hello my name is apple2,session id =" + session.getId() + " ! ");
 
-        // 获取ServletContext对象的引用
-        // 第一种方法
-        //ServletContext servletContext = this.getServletContext();
-        // 第二种方法
-        // ServletContext servletContext2 = this.getServletConfig().getServletContext();
-        //servletContext.setAttribute("name", "小明");
-
-        checkSession(session);
+        if(!checkSession(session)){
+            body = JSON.toJSONString("目前已登录!");
+            return body;
+        }
 
         //coookie
         Cookie[] cookies = request.getCookies();
@@ -106,22 +104,22 @@ public class HelloController {
         response.addCookie(cookie_username);
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json;charset=UTF-8");
-        String body = JSON.toJSONString(apple);
+        body = JSON.toJSONString(apple);
         return body;
     }
 
     public static boolean checkSession(HttpSession session){
         ServletContext servletContext = session.getServletContext();
 
-        String account =  (String) servletContext.getAttribute("account");
-        if (account == null){
+        String sessionIdOfaccount =  (String) servletContext.getAttribute("account");
+        if (sessionIdOfaccount == null){
             logger.info("checkSession: ---account is null !");
-            servletContext.setAttribute("account",session.getId());
+            servletContext.setAttribute("account", session.getId());
             return true;
         }else{
-            logger.info("checkSession: ---account = {}!",account);
             String sessionId = session.getId();
-            String oldSessionId = (String) servletContext.getAttribute(account);
+            String oldSessionId = sessionIdOfaccount;
+            logger.info("checkSession: ---sessionId={}, oldSessionId={}!", sessionId, oldSessionId);
             if (oldSessionId == null || oldSessionId.equals(sessionId)){
                 /*如果不存在此用户的sessionId(一般不可能)或者新旧id相等,说明是同一个登录*/
                 return true;
