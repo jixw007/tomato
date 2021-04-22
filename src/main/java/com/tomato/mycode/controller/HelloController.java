@@ -14,16 +14,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class HelloController {
     private static final Logger logger = LoggerFactory.getLogger(HelloController.class);
     @Autowired
     public ApppleService apppleService;
+    @Autowired
+    public AuthServiceImpl authServiceImpl;
 
     @RequestMapping("/index")
     public String index() {
@@ -57,8 +62,17 @@ public class HelloController {
     @RequestMapping("/get_apple2")
     public String getApple2(HttpServletRequest request, HttpServletResponse response) {
         //http://localhost:8094/get_apple2?account=jixw&password=me&appleId=222
-        //HttpSession session = request.getSession();
-        //System.out.println("hello my name is apple2,session id=" + session.getId() + " ! ");
+        HttpSession session = request.getSession();
+        System.out.println("hello my name is apple2,session id =" + session.getId() + " ! ");
+
+        // 获取ServletContext对象的引用
+        // 第一种方法
+        //ServletContext servletContext = this.getServletContext();
+        // 第二种方法
+        // ServletContext servletContext2 = this.getServletConfig().getServletContext();
+        //servletContext.setAttribute("name", "小明");
+
+        checkSession(session);
 
         //coookie
         Cookie[] cookies = request.getCookies();
@@ -76,9 +90,11 @@ public class HelloController {
         String appleId=request.getParameter("appleId");
         logger.info("apple2: account={},password={},appleId={}", account, password, appleId);
 
+        //加载数据
+        List<Map<String, String>> listUserInfo =  apppleService.loadUserInfo();
+
         //登录验证
-        AuthServiceImpl authServiceImpl = new AuthServiceImpl();
-        authServiceImpl.Longin(account, password);
+        //authServiceImpl.Longin(account, password);
 
         Apple apple = apppleService.getApple2ById(Long.parseLong(appleId));
 
@@ -92,5 +108,26 @@ public class HelloController {
         response.setContentType("application/json;charset=UTF-8");
         String body = JSON.toJSONString(apple);
         return body;
+    }
+
+    public static boolean checkSession(HttpSession session){
+        ServletContext servletContext = session.getServletContext();
+
+        String account =  (String) servletContext.getAttribute("account");
+        if (account == null){
+            logger.info("checkSession: ---account is null !");
+            servletContext.setAttribute("account",session.getId());
+            return true;
+        }else{
+            logger.info("checkSession: ---account = {}!",account);
+            String sessionId = session.getId();
+            String oldSessionId = (String) servletContext.getAttribute(account);
+            if (oldSessionId == null || oldSessionId.equals(sessionId)){
+                /*如果不存在此用户的sessionId(一般不可能)或者新旧id相等,说明是同一个登录*/
+                return true;
+            }else {
+                return false;/*否则就是不同客户端登录，返回false*/
+            }
+        }
     }
 }

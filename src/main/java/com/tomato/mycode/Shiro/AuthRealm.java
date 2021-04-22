@@ -1,5 +1,8 @@
 package com.tomato.mycode.Shiro;
 
+import com.tomato.mycode.dao.AppleDao;
+import com.tomato.mycode.service.AppleServiceImpl;
+import com.tomato.mycode.service.ApppleService;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
@@ -7,17 +10,23 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class AuthRealm extends AuthorizingRealm {
     Map<String, String> userMap = new HashMap<>(16);
 
     {
-        userMap.put("jixw", "me");
+        //加载数据
+        //userMap.put("jixw", "me");
+//        AppleServiceImpl apppleService = new AppleServiceImpl();
+//        List<Map<String, String>> listUserMap = apppleService.loadUserInfo();
+//        if(!listUserMap.isEmpty()){
+//            for( Map<String, String> mapTemp: listUserMap){
+//                userMap.putAll(mapTemp);
+//            }
+//        }
         super.setName("authRealm");
     }
 

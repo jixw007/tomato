@@ -16,5 +16,10 @@
      WHERE A.APPLE_ID = #{appleId}
 	</select>
 
+    <select id="loadUserInfo" resultType="java.util.Map">
+    SELECT A.ACCOUNT,
+           A.PASSWORD
+      FROM A_USER A
+	</select>
 
 </mapper>

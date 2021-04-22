@@ -6,6 +6,9 @@ import com.tomato.mycode.untils.dataroute.RouteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class AppleServiceImpl implements ApppleService {
     @Autowired
@@ -19,5 +22,10 @@ public class AppleServiceImpl implements ApppleService {
     @Override
     public Apple getApple2ById(Long appleId) {
         return appleDao.queryAppleInfo(appleId);
+    }
+
+    @Override
+    public List<Map<String, String>> loadUserInfo() {
+        return appleDao.loadUserInfo();
     }
 }
