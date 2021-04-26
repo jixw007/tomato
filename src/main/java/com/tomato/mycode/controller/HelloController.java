@@ -69,6 +69,24 @@ public class HelloController {
         String appleId=request.getParameter("appleId");
         logger.info("apple2:paramter: account={},password={},appleId={}", account, password, appleId);
 
+        //如果不是登录页面,就要从COOKIE获取用户名和密码
+        if (account == null) {
+            Cookie[] cookies = request.getCookies();
+            if (null == cookies) {
+                System.out.println("apple2: cookies is null ! ");
+            } else {
+                System.out.println("apple2: have a cookie  ! ");
+                for (Cookie cookie : cookies) {
+                    System.out.println("--- cookie.name=" + cookie.getName() + ",cookie.value=" + cookie.getValue());
+                    if(cookie.getName().equals("account")){
+                        account = cookie.getValue();
+                    }else if(cookie.getName().equals("password")){
+                        password =  cookie.getValue();
+                    }
+                }
+            }
+        }
+
         HttpSession session = request.getSession();
         session.setMaxInactiveInterval(60);
         System.out.println("hello my name is apple2,session id =" + session.getId() + " ! ");
@@ -77,17 +95,6 @@ public class HelloController {
             body = JSON.toJSONString("目前已登录!");
             return body;
         }
-
-        //coookie
-//        Cookie[] cookies = request.getCookies();
-//        if (null == cookies) {
-//            System.out.println("apple2: cookies is null ! ");
-//        }else{
-//            System.out.println("apple2: have a cookie  ! ");
-//            for( Cookie cookie : cookies){
-//                System.out.println("--- cookie.name="+cookie.getName()+",cookie.value="+cookie.getValue());
-//            }
-//        }
 
         //加载数据
         List<Map<String, String>> listUserInfo =  apppleService.loadUserInfo();
@@ -100,9 +107,13 @@ public class HelloController {
         System.out.println("apple2: appleInfo=" + JSON.toJSONString(apple) + " ! ");
 
         //设置cookie
-//        Cookie cookie_username = new Cookie("get_apple2", "jixw11");
-//        cookie_username.setMaxAge(30 * 24 * 60 * 60);
-//        response.addCookie(cookie_username);
+        Cookie cookie1 = new Cookie("account", account);
+        cookie1.setMaxAge(30 * 24 * 60 * 60);
+        response.addCookie(cookie1);
+        Cookie cookie2 = new Cookie("password", password);
+        cookie2.setMaxAge(30 * 24 * 60 * 60);
+        response.addCookie(cookie2);
+
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json;charset=UTF-8");
         body = JSON.toJSONString(apple);
