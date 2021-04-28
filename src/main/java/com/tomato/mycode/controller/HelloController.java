@@ -7,6 +7,8 @@ import com.tomato.mycode.service.ApppleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 public class HelloController {
@@ -29,6 +32,9 @@ public class HelloController {
     public ApppleService apppleService;
     @Autowired
     public AuthServiceImpl authServiceImpl;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @RequestMapping("/index")
     public String index() {
@@ -68,6 +74,12 @@ public class HelloController {
         String password=request.getParameter("password");
         String appleId=request.getParameter("appleId");
         logger.info("apple2:paramter: account={},password={},appleId={}", account, password, appleId);
+
+        //redis
+        ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();
+        valueOperations.set("shanghai", "shanghai", 20, TimeUnit.SECONDS); // 新增, 设置失效时间
+        valueOperations.set("hebei", "shijiazhuang2"); // 存在的话就是修改
+        Object hebei = valueOperations.get("hebei");
 
         //如果不是登录页面,就要从COOKIE获取用户名和密码
         if (account == null) {

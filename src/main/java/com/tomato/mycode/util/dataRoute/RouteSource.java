@@ -1,4 +1,4 @@
-package com.tomato.mycode.untils.dataroute;
+package com.tomato.mycode.util.dataRoute;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

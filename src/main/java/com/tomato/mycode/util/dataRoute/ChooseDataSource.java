@@ -1,5 +1,6 @@
-package com.tomato.mycode.untils.dataroute;
+package com.tomato.mycode.util.dataRoute;
 
+import com.tomato.mycode.util.dataRoute.RouteHolder;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 import java.util.Map;
