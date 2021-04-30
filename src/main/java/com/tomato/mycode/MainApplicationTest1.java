@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 
@@ -18,6 +19,7 @@ import javax.annotation.PostConstruct;
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @MapperScan({"com.tomato.mycode.mapper"})
+@ServletComponentScan("com.tomato.mycode.util.filter")
 public class MainApplicationTest1 {
     @PostConstruct
     public void printHelloWorld() {

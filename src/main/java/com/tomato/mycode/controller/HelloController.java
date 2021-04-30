@@ -16,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -76,10 +75,10 @@ public class HelloController {
         logger.info("apple2:paramter: account={},password={},appleId={}", account, password, appleId);
 
         //redis
-        ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();
-        valueOperations.set("shanghai", "shanghai", 20, TimeUnit.SECONDS); // 新增, 设置失效时间
-        valueOperations.set("hebei", "shijiazhuang2"); // 存在的话就是修改
-        Object hebei = valueOperations.get("hebei");
+//        ValueOperations<String, Object> valueOperations = redisTemplate.opsForValue();
+//        valueOperations.set("shanghai", "shanghai", 20, TimeUnit.SECONDS); // 新增, 设置失效时间
+//        valueOperations.set("hebei", "shijiazhuang2"); // 存在的话就是修改
+//        Object hebei = valueOperations.get("hebei");
 
         //如果不是登录页面,就要从COOKIE获取用户名和密码
         if (account == null) {
@@ -129,6 +128,7 @@ public class HelloController {
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("application/json;charset=UTF-8");
         body = JSON.toJSONString(apple);
+
         return body;
     }
 
